@@ -37,6 +37,22 @@ header {
     box-shadow: var(--shadow-lg);
 }
 
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.header-left {
+    flex: 1;
+}
+
+.header-right {
+    flex-shrink: 0;
+    text-align: right;
+}
+
 header h1 {
     font-size: 2rem;
     margin-bottom: 0.5rem;
@@ -45,6 +61,14 @@ header h1 {
 .subtitle {
     opacity: 0.9;
     font-size: 1.1rem;
+}
+
+.author-tag {
+    opacity: 0.85;
+    font-size: 0.875rem;
+    font-style: italic;
+    margin: 0;
+    max-width: 300px;
 }
 
 .filters {
@@ -416,6 +440,21 @@ footer p {
 
     .filter-group {
         width: 100%;
+    }
+
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .header-right {
+        text-align: left;
+    }
+
+    .author-tag {
+        max-width: 100%;
+        font-size: 0.8rem;
     }
 
     header h1 {
