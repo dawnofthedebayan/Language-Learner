@@ -2,7 +2,7 @@ name: Daily German Lesson
 
 on:
   schedule:
-    - cron: "0 7 * * *"  # Every day at 07:00 UTC
+    - cron: "0 6 * * *"  # Every day at 07:00 UTC
   workflow_dispatch:       # Allow manual trigger from GitHub UI
 
 jobs:

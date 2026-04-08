@@ -1,5 +1,6 @@
 from typing import TypedDict, Annotated
 import httpx
+import time
 from langgraph.graph import StateGraph, START, END
 
 from config import OPENROUTER_API_KEY
@@ -15,7 +16,7 @@ def invoke_news_summarising_agent(OPENROUTER_MODEL, json_data_array):
         news_paragraph: str
         vocabulary_sentences: str
 
-    def _invoke_openrouter(system_text: str, user_text: str) -> str:
+    def _invoke_openrouter(system_text: str, user_text: str, max_retries: int = 5) -> str:
         headers = {
             "Authorization": f"Bearer {OPENROUTER_API_KEY}",
             "Content-Type": "application/json",
@@ -32,13 +33,36 @@ def invoke_news_summarising_agent(OPENROUTER_MODEL, json_data_array):
             "max_tokens": 500,
         }
 
-        with httpx.Client(timeout=30) as client:
-            response = client.post(
-                "https://openrouter.ai/api/v1/chat/completions",
-                headers=headers,
-                json=payload,
-            )
-            response.raise_for_status()
+        for attempt in range(max_retries):
+            try:
+                with httpx.Client(timeout=60) as client:
+                    response = client.post(
+                        "https://openrouter.ai/api/v1/chat/completions",
+                        headers=headers,
+                        json=payload,
+                    )
+                    response.raise_for_status()
+                    break
+            except httpx.HTTPStatusError as e:
+                if e.response.status_code == 429:
+                    if attempt < max_retries - 1:
+                        wait_time = (2 ** attempt) + (attempt * 0.5)
+                        print(f"[OpenRouter] Rate limit hit. Retrying in {wait_time:.1f}s (attempt {attempt + 1}/{max_retries})")
+                        time.sleep(wait_time)
+                        continue
+                    else:
+                        print(f"[OpenRouter] Max retries reached. Returning fallback.")
+                        return "Zusammenfassung konnte aufgrund von API-Limits nicht erstellt werden."
+                else:
+                    raise
+            except Exception as e:
+                if attempt < max_retries - 1:
+                    wait_time = 2 ** attempt
+                    print(f"[OpenRouter] Error: {e}. Retrying in {wait_time}s")
+                    time.sleep(wait_time)
+                    continue
+                else:
+                    raise
 
             data = response.json()
             choices = data.get("choices") or []
