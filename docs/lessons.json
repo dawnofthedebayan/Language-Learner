@@ -1,5 +1,21 @@
 [
   {
+    "date": "2026-04-09",
+    "type": "news",
+    "topic": "NA",
+    "content": null,
+    "vocabulary": "Zusammenfassung konnte aufgrund von API-Limits nicht erstellt werden.",
+    "model": "google/gemma-4-26b-a4b-it:free"
+  },
+  {
+    "date": "2026-04-09",
+    "type": "topic",
+    "topic": "Gesundheit und Wissenschaft",
+    "content": "Diskussion konnte aufgrund von API-Limits nicht erstellt werden.",
+    "vocabulary": "Diskussion konnte aufgrund von API-Limits nicht erstellt werden.",
+    "model": "google/gemma-4-26b-a4b-it:free"
+  },
+  {
     "date": "2026-04-08",
     "type": "news",
     "topic": "NA",
