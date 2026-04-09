@@ -12,7 +12,6 @@ OPENROUTER_MODELS_TEXT_AVAILABLE: list = os.getenv("OPENROUTER_MODELS_AVAILABLE"
     "google/gemma-2-9b-it:free",
     "mistralai/mistral-7b-instruct:free",
     "qwen/qwen-2-7b-instruct:free",
-    "microsoft/phi-3-mini-128k-instruct:free",
 ])
 
 # --- OpenAI (Whisper + TTS) ---
