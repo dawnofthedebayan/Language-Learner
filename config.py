@@ -7,15 +7,12 @@ load_dotenv()
 OPENROUTER_API_KEY: str = os.getenv("OPENROUTER_API_KEY", "")
 OPENROUTER_BASE_URL: str = "https://openrouter.ai/api/v1"
 OPENROUTER_MODELS_TEXT_AVAILABLE: list = os.getenv("OPENROUTER_MODELS_AVAILABLE", [
-    "anthropic/claude-opus-4.6-fast",
-    "google/gemma-4-26b-a4b-it:free",
-    "meta-llama/llama-3.2-1b-instruct",
-    "google/gemma-4-31b-it:free",
-    "openai/gpt-5.4-nano",
-    "arcee-ai/trinity-large-preview:free", 
-    "openai/gpt-oss-20b:free",
-    "google/gemma-3-4b-it:free",
-
+    "meta-llama/llama-3.2-3b-instruct:free",
+    "meta-llama/llama-3.1-8b-instruct:free",
+    "google/gemma-2-9b-it:free",
+    "mistralai/mistral-7b-instruct:free",
+    "qwen/qwen-2-7b-instruct:free",
+    "microsoft/phi-3-mini-128k-instruct:free",
 ])
 
 # --- OpenAI (Whisper + TTS) ---

@@ -1,4 +1,5 @@
 import sys
+import time
 from datetime import datetime
 from config import MEMORY_PATH, TOPICS_PATH, AUDIO_BACKEND, OPENROUTER_MODELS_TEXT_AVAILABLE
 from topics import load_topics, pick_topic_of_day
@@ -91,7 +92,12 @@ def main() -> None:
     article_copy = articles.copy() 
     for article in article_copy:
         del article["url"]
+    
+    print(f"[LLM] Using model: {llm_model}")
+    print("[News] Generating news summary...")
     result = invoke_news_summarising_agent(llm_model, article_copy)
+    print("[News] Summary complete. Waiting 5s before next API call...")
+    time.sleep(5)  # Wait 5 seconds to avoid rate limits
     # add to this result today's date
     
     date = datetime.now().strftime("%Y-%m-%d") 
@@ -114,7 +120,9 @@ def main() -> None:
 
 
     # topic agent
+    print("[Topic] Generating topic discussion...")
     topic_result = invoke_topic_discussion_agent(llm_model, topic, previous_topics_content)
+    print("[Topic] Discussion complete.")
 
     # add topic result to database
     add_lesson_to_database(date, "topic", topic, topic_result["topic_discussion"], topic_result["vocabulary_sentences"], llm_model)
