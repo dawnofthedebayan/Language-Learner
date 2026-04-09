@@ -7,11 +7,11 @@ load_dotenv()
 OPENROUTER_API_KEY: str = os.getenv("OPENROUTER_API_KEY", "")
 OPENROUTER_BASE_URL: str = "https://openrouter.ai/api/v1"
 OPENROUTER_MODELS_TEXT_AVAILABLE: list = os.getenv("OPENROUTER_MODELS_AVAILABLE", [
-    "meta-llama/llama-3.2-3b-instruct:free",
-    "meta-llama/llama-3.1-8b-instruct:free",
-    "google/gemma-2-9b-it:free",
-    "mistralai/mistral-7b-instruct:free",
-    "qwen/qwen-2-7b-instruct:free",
+    "meta-llama/llama-3.2-3b-instruct",
+    "anthropic/claude-opus-4.6-fast",
+    "google/gemma-2-9b-it",
+    "google/gemma-4-26b-a4b-it",
+    "minimax/minimax-m2.7",
 ])
 
 # --- OpenAI (Whisper + TTS) ---
@@ -46,3 +46,9 @@ CEFR_LEVEL: str = "B2-C2"
 
 # --- Output ---
 AUDIO_OUTPUT_PATH: str = os.path.join(os.path.dirname(__file__), "data", "lesson_audio.mp3")
+
+# --- Rate Limiting ---
+OPENROUTER_RETRY_MAX_ATTEMPTS: int = 6
+OPENROUTER_RETRY_BASE_DELAY: float = 3.0
+OPENROUTER_INTER_CALL_DELAY: float = 8.0
+OPENROUTER_AGENT_DELAY: float = 15.0

@@ -1,7 +1,13 @@
 import sys
 import time
 from datetime import datetime
-from config import MEMORY_PATH, TOPICS_PATH, AUDIO_BACKEND, OPENROUTER_MODELS_TEXT_AVAILABLE
+from config import (
+    MEMORY_PATH,
+    TOPICS_PATH,
+    AUDIO_BACKEND,
+    OPENROUTER_MODELS_TEXT_AVAILABLE,
+    OPENROUTER_AGENT_DELAY
+)
 from topics import load_topics, pick_topic_of_day
 from news_fetcher import fetch_regional_news
 from audio_handler import speak
@@ -96,8 +102,8 @@ def main() -> None:
     print(f"[LLM] Using model: {llm_model}")
     print("[News] Generating news summary...")
     result = invoke_news_summarising_agent(llm_model, article_copy)
-    print("[News] Summary complete. Waiting 5s before next API call...")
-    time.sleep(5)  # Wait 5 seconds to avoid rate limits
+    print(f"[News] Summary complete. Waiting {OPENROUTER_AGENT_DELAY}s before topic agent...")
+    time.sleep(OPENROUTER_AGENT_DELAY)  # Wait 5 seconds to avoid rate limits
     # add to this result today's date
     
     date = datetime.now().strftime("%Y-%m-%d") 

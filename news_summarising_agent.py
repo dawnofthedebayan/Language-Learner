@@ -3,7 +3,12 @@ import httpx
 import time
 from langgraph.graph import StateGraph, START, END
 
-from config import OPENROUTER_API_KEY
+from config import (
+    OPENROUTER_API_KEY,
+    OPENROUTER_RETRY_MAX_ATTEMPTS,
+    OPENROUTER_RETRY_BASE_DELAY,
+    OPENROUTER_INTER_CALL_DELAY
+)
 
 
 
@@ -16,7 +21,7 @@ def invoke_news_summarising_agent(OPENROUTER_MODEL, json_data_array):
         news_paragraph: str
         vocabulary_sentences: str
 
-    def _invoke_openrouter(system_text: str, user_text: str, max_retries: int = 5) -> str:
+    def _invoke_openrouter(system_text: str, user_text: str, max_retries: int = OPENROUTER_RETRY_MAX_ATTEMPTS) -> str:
         headers = {
             "Authorization": f"Bearer {OPENROUTER_API_KEY}",
             "Content-Type": "application/json",
@@ -46,7 +51,7 @@ def invoke_news_summarising_agent(OPENROUTER_MODEL, json_data_array):
             except httpx.HTTPStatusError as e:
                 if e.response.status_code == 429:
                     if attempt < max_retries - 1:
-                        wait_time = (2 ** attempt) + (attempt * 0.5)
+                        wait_time = OPENROUTER_RETRY_BASE_DELAY * (2 ** attempt)
                         print(f"[OpenRouter] Rate limit hit. Retrying in {wait_time:.1f}s (attempt {attempt + 1}/{max_retries})")
                         time.sleep(wait_time)
                         continue
@@ -57,7 +62,7 @@ def invoke_news_summarising_agent(OPENROUTER_MODEL, json_data_array):
                     raise
             except Exception as e:
                 if attempt < max_retries - 1:
-                    wait_time = 2 ** attempt
+                    wait_time = OPENROUTER_RETRY_BASE_DELAY * (2 ** attempt)
                     print(f"[OpenRouter] Error: {e}. Retrying in {wait_time}s")
                     time.sleep(wait_time)
                     continue
@@ -125,6 +130,8 @@ def invoke_news_summarising_agent(OPENROUTER_MODEL, json_data_array):
         user_msg = f"Here ist mein JSON data:\n{raw}"
 
         generated = _invoke_openrouter(sys_msg, user_msg)
+        print(f"[News] Summary generated. Waiting {OPENROUTER_INTER_CALL_DELAY}s before vocabulary generation...")
+        time.sleep(OPENROUTER_INTER_CALL_DELAY)
         return {
             **state,
             "news_paragraph": generated
