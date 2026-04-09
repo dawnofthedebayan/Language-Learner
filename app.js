@@ -90,7 +90,8 @@ function renderLessons() {
 }
 
 function createCard(lesson) {
-    const preview = stripMarkdown(lesson.content).substring(0, 150) + '...';
+    const content = lesson.content || 'No content available';
+    const preview = stripMarkdown(content).substring(0, 150) + '...';
     const badgeClass = lesson.type === 'news' ? 'badge-news' : 'badge-topic';
     const displayTopic = lesson.topic === 'NA' ? 'Daily News' : lesson.topic;
     
@@ -140,8 +141,10 @@ function openModal(lesson) {
     const displayTopic = lesson.topic === 'NA' ? 'Daily News Summary' : lesson.topic;
     const badgeClass = lesson.type === 'news' ? 'badge-news' : 'badge-topic';
     
-    const contentHtml = marked.parse(lesson.content || 'No content available.');
-    const vocabularyHtml = lesson.vocabulary ? marked.parse(lesson.vocabulary) : '<p>No vocabulary notes.</p>';
+    const content = lesson.content || 'Content not available due to API limits.';
+    const vocabulary = lesson.vocabulary || 'Vocabulary not available.';
+    const contentHtml = marked.parse(content);
+    const vocabularyHtml = marked.parse(vocabulary);
     
     modalBody.innerHTML = `
         <div class="modal-header">
