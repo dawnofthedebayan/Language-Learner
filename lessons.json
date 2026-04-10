@@ -1,5 +1,21 @@
 [
   {
+    "date": "2026-04-10",
+    "type": "news",
+    "topic": "NA",
+    "content": null,
+    "vocabulary": null,
+    "model": "google/gemma-4-26b-a4b-it"
+  },
+  {
+    "date": "2026-04-10",
+    "type": "topic",
+    "topic": "Bildung und Hochschule",
+    "content": "Hier ist eine Betrachtung zum Thema Bildung und Hochschule:\n\n**Einleitung**\nDas Bildungssystem und der Hochschulsektor bilden das Fundament für die persönliche Entwicklung des Einzelnen sowie für den wirtschaftlichen und gesellschaftlichen Fortschritt eines Landes. In einer Welt, die sich durch technologischen Wandel und zunehmende Komplexität immer schneller dreht, gewinnen akademische Ausbildung und lebenslanges Lernen eine zentrale Bedeutung.\n\n**Hauptteil**\nDie Rolle der Hochschulen hat sich in den letzten Jahrzehnten grundlegend gewandelt. Während sie früher primär Orte der reinen Wissensvermittlung und Forschung waren, fungieren sie heute verstärkt als Schnittstellen zwischen Theorie und Praxis. Ein wesentlicher Aspekt ist dabei die Digitalisierung: Digitale Lehrformate, hybride Lernmodelle und der Einsatz von Künstlicher Intelligenz verändern die Art und Weise, wie Wissen erworben und vermittelt wird. Dies bietet zwar enorme Chancen für mehr Flexibilität und Zugänglichkeit, stellt die Institutionen jedoch auch vor die Herausforderung, die Qualität der Lehre und die soziale Gerechtigkeit im digitalen Raum sicherzustellen.\n\nEin weiterer kritischer Punkt ist die Passgenauigkeit der akademischen Ausbildung auf den Arbeitsmarkt. Es besteht ein ständiger Diskurs darüber, wie viel Spezialisierung notwendig ist und wie wichtig eine breite, interdisziplinäre Grundbildung bleibt. Hochschulen müssen den Spagat meistern, hochspezialisiertes Fachwissen zu lehren und gleichzeitig die kritischen Denkfähigkeiten zu fördern, die notwendig sind, um in einer volatilen Arbeitswelt bestehen zu können.\n\n**Schluss**\nZusammenfassend lässt sich sagen, dass Bildung und Hochschulen keine statischen Institutionen sind, sondern sich in einem stetigen Transformationsprozess befinden. Um den Herausforderungen der Zukunft gerecht zu werden, müssen akademische Einrichtungen agil bleiben, Innovationen zulassen und gleichzeitig den Kern ihrer Aufgabe – die Förderung von Erkenntnis und kritischem Denken – bewahren.",
+    "vocabulary": "Hallo! Als dein Deutschlehrer habe ich diesen anspruchsvollen Text analysiert. Hier sind die 5 wichtigsten Wörter auf B2-C1 Niveau, die dir helfen werden, dein akademisches Vokabular zu erweitern:\n\n1. **fungieren** – Übersetzung: to function / to serve as; Grammatik: fungiert, fungierte, hat fungiert; Beispielsatz: Hochschulen fungieren heute verstärkt als Schnittstellen zwischen Theorie und Praxis.\n\n2. **die Passgenauigkeit** – Übersetzung: precision of fit / suitability; Grammatik: die Passgenauigkeit, \"-en\"; Beispielsatz: Ein kritischer Punkt ist die Passgenauigkeit der akademischen Ausbildung auf den aktuellen Arbeitsmarkt.\n\n3. **der Spagat** – Übersetzung: split / balancing act; Grammatik: der Spagat, \"-e\"; Beispielsatz: Hochschulen müssen den Spagat zwischen Spezialisierung und breiter Grundbildung meistern.\n\n4. **volatil** – Übersetzung: volatile / unstable; Grammatik: (Adjektiv); Beispielsatz: In einer volatilen Arbeitswelt sind kritische Denkfähigkeiten von entscheidender Bedeutung.\n\n5. **bewahren** – Übersetzung: to preserve / to maintain; Grammatik: bewahrt, bewahrte, hat bewahrt; Beispielsatz: Institutionen müssen trotz technologischem Wandel den Kern ihrer Aufgabe bewahren.",
+    "model": "google/gemma-4-26b-a4b-it"
+  },
+  {
     "date": "2026-04-09",
     "type": "topic",
     "topic": "Satellitentechnologie und Erdbeobachtung",
