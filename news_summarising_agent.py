@@ -35,9 +35,10 @@ def invoke_news_summarising_agent(OPENROUTER_MODEL, json_data_array):
                 {"role": "user", "content": user_text},
             ],
             "temperature": 0.7,
-            "max_tokens": 500,
+            "max_tokens": 2000,
         }
 
+        response = None
         for attempt in range(max_retries):
             try:
                 with httpx.Client(timeout=60) as client:
@@ -69,33 +70,36 @@ def invoke_news_summarising_agent(OPENROUTER_MODEL, json_data_array):
                 else:
                     raise
 
-            data = response.json()
-            choices = data.get("choices") or []
-            if not choices:
-                return "Keine Zusammenfassung verfügbar."
-
-            message = (choices[0] or {}).get("message") or {}
-            content = message.get("content")
-
-            if isinstance(content, str):
-                text = content.strip()
-            elif isinstance(content, list):
-                parts = []
-                for item in content:
-                    if isinstance(item, dict) and item.get("type") == "text":
-                        parts.append(item.get("text", ""))
-                text = "\n".join(parts).strip()
-            else:
-                text = ""
-
-            if text:
-                return text
-
-            fallback_text = (choices[0] or {}).get("text")
-            if isinstance(fallback_text, str) and fallback_text.strip():
-                return fallback_text.strip()
-
+        if response is None:
             return "Keine Zusammenfassung verfügbar."
+
+        data = response.json()
+        choices = data.get("choices") or []
+        if not choices:
+            return "Keine Zusammenfassung verfügbar."
+
+        message = (choices[0] or {}).get("message") or {}
+        content = message.get("content")
+
+        if isinstance(content, str):
+            text = content.strip()
+        elif isinstance(content, list):
+            parts = []
+            for item in content:
+                if isinstance(item, dict) and item.get("type") == "text":
+                    parts.append(item.get("text", ""))
+            text = "\n".join(parts).strip()
+        else:
+            text = ""
+
+        if text:
+            return text
+
+        fallback_text = (choices[0] or {}).get("text")
+        if isinstance(fallback_text, str) and fallback_text.strip():
+            return fallback_text.strip()
+
+        return "Keine Zusammenfassung verfügbar."
 
     def summarize_json(state: State) -> State:
         raw = state["raw_json"]
@@ -188,6 +192,9 @@ def invoke_news_summarising_agent(OPENROUTER_MODEL, json_data_array):
     result = app.invoke({"raw_json": input_json})
 
     return result
+
+
+
 
 
 

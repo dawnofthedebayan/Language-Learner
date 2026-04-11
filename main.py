@@ -88,6 +88,7 @@ def main() -> None:
     try:
         categories = ["general", "business", "technology", "health", "science", "sports", "entertainment"]
         articles = fetch_regional_news(["us"], category=categories)
+        print(f"[News] Fetched {len(articles)} articles")
     except Exception as e:
         print(f"[News] Could not fetch news: {e}")
         articles = []
@@ -102,6 +103,8 @@ def main() -> None:
     print(f"[LLM] Using model: {llm_model}")
     print("[News] Generating news summary...")
     result = invoke_news_summarising_agent(llm_model, article_copy)
+    # show news summary 
+    print(result["news_paragraph"])
     print(f"[News] Summary complete. Waiting {OPENROUTER_AGENT_DELAY}s before topic agent...")
     time.sleep(OPENROUTER_AGENT_DELAY)  # Wait 5 seconds to avoid rate limits
     # add to this result today's date
